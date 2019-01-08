@@ -10,6 +10,7 @@ let choice = ""
 let timer;
 let correct = 0;
 let incorrect = 0;
+let unanswered = 0;
 let interval;
 
 // create a timer for the questions
@@ -17,11 +18,14 @@ let interval;
 function myTimer() {
 $("#time").text("Time remaining: " + timeLeft + " seconds")
 timeLeft--
-$("#start").hide();
-// make a you didn't guess in time and show the answer
-// if (timeLeft === 0) {
-
-// }
+// if you don't guess in time
+if (timeLeft === 0) {
+    $("#question, #answer1, #answer2, #answer3, #answer4, #time").empty();
+    $("#question").text("Too late the correct answer was " + answer);
+    unanswered++
+    clearInterval(timer);
+    nextQuestion();
+}
 }
 
 function thisTimer() {
@@ -32,6 +36,7 @@ function thisTimer() {
 $("#start").click(function() {
     thisTimer();
     myTimer();
+    $("#start").hide();
 })
 
 
@@ -97,9 +102,12 @@ $("#answer1").click(function() {
     // will change this to be more specific to each question later
     if (choice === answer) {
         $("#question").text("correct");
+        correct++
     } else {
         $("#question").text(choice + " is incorrect the correct answer was " + answer);
+        incorrect++
     }
+    interval = setInterval(nextQuestion, 3000)
     nextQuestion();
 })
 
@@ -109,9 +117,12 @@ $("#answer2").click(function() {
     $("#question, #answer1, #answer2, #answer3, #answer4, #time").empty();
     if (choice === answer) {
         $("#question").text("correct");
+        correct++
     } else {
         $("#question").text(choice + " is incorrect the correct answer was " + answer);
+        incorrect++
     }
+    interval = setInterval(nextQuestion, 3000)
     nextQuestion();
 })
 
@@ -121,9 +132,12 @@ $("#answer3").click(function() {
     $("#question, #answer1, #answer2, #answer3, #answer4, #time").empty();
     if (choice === answer) {
         $("#question").text("correct");
+        correct++
     } else {
         $("#question").text(choice + " is incorrect the correct answer was " + answer);
+        incorrect++
     }
+    interval = setInterval(nextQuestion, 3000)
     nextQuestion();
 })
 
@@ -133,8 +147,10 @@ $("#answer4").click(function() {
     $("#question, #answer1, #answer2, #answer3, #answer4, #time").empty();
     if (choice === answer) {
         $("#question").text("correct");
+        correct++
     } else {
         $("#question").text(choice + " is incorrect the correct answer was " + answer);
+        incorrect++
     }
     // trying to delay by 3seconds so that the answer shows not sure why not working
     interval = setInterval(nextQuestion, 3000)
@@ -158,6 +174,7 @@ function nextQuestion() {
     }
     else if (answer === question5Answer) {
     }
+    // need to change this if to something else
     if (answer !== question5Answer) {
         thisTimer();
         myTimer();
