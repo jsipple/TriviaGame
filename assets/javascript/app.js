@@ -29,7 +29,7 @@ if (timeLeft === -1) {
     $("#question").text("Too late the correct answer was " + answer);
     unanswered++
     clearInterval(timer);
-    nextQuestion();
+    setTimeout(nextQuestion, 3000)
 }
 }
 
@@ -46,7 +46,7 @@ function question1() {
     answer = question1Answer;
     $("#question").text("What type or spren is pattern?");
     $("#answer1").text("Cryptic");
-    $("#answer2").text("fire");
+    $("#answer2").text("Fire");
     $("#answer3").text("Unmade");
     $("#answer4").text("Bind");
 }
@@ -228,9 +228,10 @@ function nextQuestion() {
     }
     else if (answer === question5Answer) {
         $("#question").text("Your score is:");
-        $("#answer1").text("Correct: " + correct);
-        $("#answer2").text("Incorrect: " + incorrect);
-        $("#answer3").text("Unanswered: " + unanswered);
+        // maybe hide these instead and make different ones or take out class
+        $("#question").append("<p>Correct: " + correct + "</p>");
+        $("#question").append("<p>Incorrect: " + incorrect + "</p>");
+        $("#question").append("<p>Unanswered: " + unanswered + "</p>");
         $("#restart").show();
     }
     // need to change this if to something else
